@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
+import os 
 
 st.set_page_config(page_title="Bike Sharing Dashboard", page_icon="🚲", layout="wide")
 
@@ -9,7 +10,11 @@ sns.set_theme(style="whitegrid", context="talk")
 
 @st.cache_data
 def load_data():
-    df = pd.read_csv("main_data.csv")
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    file_path = os.path.join(current_dir, "main_data.csv")
+    
+    df = pd.read_csv(file_path)
     df['dteday'] = pd.to_datetime(df['dteday'])
     return df
 
